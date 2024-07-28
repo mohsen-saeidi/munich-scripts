@@ -262,6 +262,38 @@ class KVR(Buro):
         return 'kvr'
 
 
+class Commitment(Buro):
+    @staticmethod
+    def get_name():
+        return 'Verpflichtungserklärung '
+
+    @staticmethod
+    def _get_base_page():
+        return 'https://stadt.muenchen.de/service/info/hauptabteilung-ii-buergerangelegenheiten/1063743/'
+
+    @staticmethod
+    def get_frame_url():
+        return 'https://www22.muenchen.de/abh/termin/index.php?cts=1063742'
+
+    @staticmethod
+    def get_typical_appointments() -> list:
+        try:
+            res = []
+            for index in [0]:
+                res.append((index, Commitment.get_available_appointment_types()[index]))
+            return res
+        except IndexError:
+            print('ERROR: cannot return typical appointments for Pension (most probably the indexes have changed)')
+            return []
+
+    @staticmethod
+    def get_id():
+        """
+        :return: machine-readable unique ID of the buro
+        """
+        return 'commitment'
+
+
 class ForeignLabor(Buro):
     @staticmethod
     def get_name():
@@ -288,7 +320,7 @@ def get_termins(buro, termin_type):
     # Session is required to keep cookies between requests
     s = requests.Session()
     # First request to get and save cookies
-    first_page = s.post(buro.get_frame_url())
+    first_page = s.get(buro.get_frame_url())
     try:
         token = re.search('FRM_CASETYPES_token" value="(.*?)"', first_page.text).group(1)
     except AttributeError:
@@ -337,7 +369,7 @@ def get_termins(buro, termin_type):
 
 if __name__ == '__main__':
     # Example for exchanging driver license
-    appointments = get_termins(DMV, 'FS Umschreibung Ausländischer FS')
+    appointments = get_termins(Commitment, 'Verpflichtungserklärung (kurzfristige Aufenthalte)')
 
     # # Example for Anmeldung
     # appointments = get_termins(CityHall, 'An- oder Ummeldung - Einzelperson')
