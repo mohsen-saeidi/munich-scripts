@@ -59,7 +59,7 @@ def main():
     # Start the Bot
     if DEBUG:
         logger.info('Starting bot in debug polling mode')
-        updater.start_polling()
+        updater.start_polling(poll_interval=10)
         # Run the bot until you press Ctrl-C or the process receives SIGINT,
         # SIGTERM or SIGABRT. This should be used most of the time, since
         # start_polling() is non-blocking and will stop the bot gracefully.
