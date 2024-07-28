@@ -8,4 +8,4 @@ services:
     volumes:
       - ./jobs.sqlite:/termin/jobs.sqlite
     ports:
-      - "8443:8443"
+      - "443:443"
