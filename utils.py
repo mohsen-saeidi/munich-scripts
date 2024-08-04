@@ -29,4 +29,4 @@ def get_bot():
 
 
 def get_min_interval():
-    return int(os.getenv("MIN_CHECK_INTERVAL_MINUTES", 1))
+    return int(os.getenv("MIN_CHECK_INTERVAL_MINUTES", 15))
