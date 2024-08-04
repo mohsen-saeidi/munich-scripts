@@ -2,5 +2,7 @@
 *
 
 !requirements.txt
+!key.pem
+!cert.pem
 # include only .py files
 !*.py
