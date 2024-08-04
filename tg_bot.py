@@ -70,7 +70,7 @@ def main():
             logger.critical('HOST URL is not set!')
             sys.exit(-1)
         updater.start_webhook(listen="0.0.0.0",
-                              port=8443,
+                              port=443,
                               url_path=BOT_TOKEN,
                               key="key.pem",
                               cert="cert.pem",
